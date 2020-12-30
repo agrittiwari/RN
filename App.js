@@ -2,29 +2,37 @@ import React from 'react';
 import { Button, FlatList, StyleSheet, Text, View } from 'react-native';
 import Constants from 'expo-constants';
 
-import contacts from './contacts'
+import contacts, {compareNames} from './contacts'
 import Row from './row'
 export default class App extends React.Component {
   state = {
     showContacts: false,
+    contacts : contacts,
   }
 
   toggleContacts = () => {
     this.setState(prevState => ({showContacts: !prevState.showContacts}))
   }
 
-  renderItem = (obj) => <row {...obj.item} />
+  sort = () => {
+    this.setState(prevState => ({
+      contacts: prevState.contacts.sort(compareNames)
+    }))
+  }
+  renderItem = (obj) => <Row {...obj.item} />
 
   render() {
     return(
     
       <View  style={styles.container}>
         <Button title="toggle contacts" onPress={this.toggleContacts} />
-        {(this.state.showContacts) && (
+        <Button title="sort" onPress={this.sort} />
+               {(this.state.showContacts) && (
              <FlatList 
-             renderItem ={ obj =>  <Row {...(obj.item)}/>}
-             data ={contacts}
-             />
+             renderItem = {this.renderItem}
+             data ={this.state.contacts}
+             keyExtractor={item => item.key.toString()}         
+              />
         )}
       </View>
     
