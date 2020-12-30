@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, FlatList, StyleSheet, Text, View } from 'react-native';
+import { Button, SectionList, StyleSheet, Text, View } from 'react-native';
 import Constants from 'expo-constants';
 
 import contacts, {compareNames} from './contacts'
@@ -21,6 +21,8 @@ export default class App extends React.Component {
   }
   renderItem = (obj) => <Row {...obj.item} />
 
+renderSectionHeader = obj => <Text>{obj.section.title}</Text>
+
   render() {
     return(
     
@@ -28,10 +30,13 @@ export default class App extends React.Component {
         <Button title="toggle contacts" onPress={this.toggleContacts} />
         <Button title="sort" onPress={this.sort} />
                {(this.state.showContacts) && (
-             <FlatList 
+             <SectionList 
              renderItem = {this.renderItem}
-             data ={this.state.contacts}
-             keyExtractor={item => item.key.toString()}         
+             renderSectionHeader = {this.renderSectionHeader}
+             sections ={[{
+               title: 'A',
+               data: this.state.contacts,
+             }]}         
               />
         )}
       </View>
