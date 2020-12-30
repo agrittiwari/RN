@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { Button, FlatList, StyleSheet, Text, View } from 'react-native';
 import Constants from 'expo-constants';
 
 import contacts from './contacts'
@@ -13,17 +13,18 @@ export default class App extends React.Component {
     this.setState(prevState => ({showContacts: !prevState.showContacts}))
   }
 
+  renderItem = (obj) => <row {...obj.item} />
+
   render() {
     return(
     
       <View  style={styles.container}>
         <Button title="toggle contacts" onPress={this.toggleContacts} />
         {(this.state.showContacts) && (
-             <ScrollView >
-       {contacts.map(contact => (
-        <Row {...contact}/>
-       ))}
-       </ScrollView>
+             <FlatList 
+             renderItem ={ obj =>  <Row {...(obj.item)}/>}
+             data ={contacts}
+             />
         )}
       </View>
     
