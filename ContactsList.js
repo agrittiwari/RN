@@ -1,12 +1,18 @@
 import React from 'react'
-import {SectionList } from 'react-native'
+import {SectionList, Text } from 'react-native'
 import PropTypes from 'prop-types';
+import Row from './row'
+
+const renderItem = (obj) => <Row {...obj.item} />
+
+const renderSectionHeader = obj => <Text>{obj.section.title}</Text>
 
  const ContactsList = (props) => {
+  
     return (
         <SectionList 
-             renderItem = {props.renderItem}
-             renderSectionHeader = {props.renderSectionHeader}
+             renderItem = {renderItem}
+             renderSectionHeader = {renderSectionHeader}
              sections ={[{
                title: 'A',
                data: props.contacts,
