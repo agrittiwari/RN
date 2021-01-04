@@ -42,7 +42,8 @@ handlePhoneChange = phone => {
         <TextInput 
          style={styles.input}
          onChangeText={this.handlePhoneChange}
-         value={this.state.phone}/>
+         value={this.state.phone} 
+         keyboardType="numeric"/>
         
         <Button title="Add Contact"/>  
     </View>
