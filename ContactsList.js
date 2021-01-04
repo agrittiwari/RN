@@ -31,8 +31,7 @@ const sections =Object.keys(contactsByLetter).sort().map(letter => ({
 }
 
 ContactsList.propTypes ={
-    renderItem: PropTypes.func.isRequired,
-    renderSectionHeader: PropTypes.func.isRequired,
+  
     contacts: PropTypes.array.isRequired,
 }
 
